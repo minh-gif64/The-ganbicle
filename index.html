@@ -1,0 +1,848 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Ganbicle — GAN speedcubes and gear</title>
+  <meta name="description" content="The complete GAN range: flagship speedcubes, smart cubes and accessories." />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    body[data-page="home"] .nav {
+      margin-bottom: 0;
+    }
+
+    .logo-hero {
+      max-width: 2000px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 48px 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(20px, 4vw, 54px);
+      flex-wrap: wrap;
+    }
+
+    .logo-cube {
+      width: clamp(130px, 17vw, 250px);
+      height: auto;
+      flex: none;
+      stroke: var(--text);
+      fill: none;
+      stroke-width: 1.1;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .logo-word {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      min-width: 0;
+    }
+
+    .logo-the {
+      font-size: clamp(13px, 2vw, 26px);
+      letter-spacing: 0.44em;
+      font-weight: 500;
+      color: var(--text-faint);
+      margin-left: 0.3em;
+    }
+
+    .logo-name {
+      font-size: clamp(44px, 9vw, 140px);
+      line-height: 0.9;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: var(--text);
+    }
+
+    .logo-tag {
+      margin-top: 12px;
+      font-size: clamp(12px, 1.5vw, 18px);
+      color: var(--text-dim);
+    }
+
+    @media (max-width: 640px) {
+      .logo-hero {
+        padding: 30px 12px 16px;
+        gap: 16px;
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .banner-wrapper {
+        margin: 26px 0 22px;
+      }
+
+      .logo-word {
+        align-items: center;
+      }
+
+      .logo-the {
+        margin-left: 0;
+      }
+    }
+
+    .banner-wrapper {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      margin: 40px 0 34px;
+    }
+
+    .banner-wrapper img {
+      display: block;
+      width: 100%;
+      height: 670px;
+      object-fit: cover;
+    }
+
+    .banner-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+
+    .arrow-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      color: #fff;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .arrow-btn:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .arrow-btn {
+      transition: opacity 0.2s;
+    }
+
+    .arrow-btn:disabled {
+      pointer-events: none;
+    }
+
+    .arrow-left {
+      left: 20px;
+    }
+
+    .arrow-right {
+      right: 20px;
+    }
+
+    .home-strip {
+      max-width: 2000px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 22px 18px 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 12px;
+    }
+
+    .home-strip h1 {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 500;
+    }
+
+    .home-strip p {
+      margin: 3px 0 0;
+      font-size: 13px;
+      color: var(--text-faint);
+    }
+
+    .home-grid {
+      max-width: 2000px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 0 18px 26px;
+    }
+
+    #bestGrid {
+      grid-template-columns: repeat(auto-fit, minmax(215px, 320px));
+      justify-content: center;
+    }
+
+    #productGrid {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+
+    @media (max-width: 1400px) {
+      #productGrid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 1000px) {
+      #productGrid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      #productGrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .picker {
+      max-width: 2000px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 4px 18px 34px;
+    }
+
+    .picker-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .picker h2 {
+      margin: 0;
+      font-size: 19px;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    .picker-sub {
+      margin: 4px 0 18px;
+      font-size: 13px;
+      color: var(--text-faint);
+      text-align: center;
+    }
+
+    .pq {
+      margin-bottom: 14px;
+    }
+
+    .pq-lab {
+      display: block;
+      font-size: 12px;
+      color: var(--text-faint);
+      margin-bottom: 7px;
+      letter-spacing: 0.03em;
+    }
+
+    .pick-out {
+      margin-top: 18px;
+      border-top: 1px solid var(--border);
+      padding-top: 18px;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .pick-out .thumb {
+      width: 140px;
+      flex: none;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    .pick-meta {
+      flex: 1;
+      min-width: 230px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .pick-name {
+      font-size: 16px;
+      line-height: 1.35;
+    }
+
+    .pick-why {
+      font-size: 12.5px;
+      color: var(--text-dim);
+      line-height: 1.55;
+    }
+
+    .pick-note {
+      font-size: 12px;
+      color: var(--text-faint);
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+    .pick-acts {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 2px;
+    }
+
+    @media (max-width: 640px) {
+      .picker {
+        padding: 4px 12px 26px;
+      }
+
+      .picker-box {
+        padding: 16px 14px;
+      }
+
+      .pick-out .thumb {
+        width: 100%;
+        max-width: 200px;
+        margin: 0 auto;
+      }
+    }
+
+    .section-rule {
+      max-width: 2000px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 18px;
+    }
+
+    .section-rule::before {
+      content: "";
+      display: block;
+      height: 1px;
+      background: linear-gradient(90deg,
+          transparent,
+          var(--border-strong) 20%,
+          var(--border-strong) 80%,
+          transparent);
+    }
+
+    .contact {
+      max-width: 2000px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 0 18px 34px;
+    }
+
+    .contact-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .contact h2 {
+      margin: 0;
+      font-size: 19px;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    .contact-sub {
+      margin: 4px 0 18px;
+      font-size: 13px;
+      color: var(--text-faint);
+      text-align: center;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+      gap: 14px;
+    }
+
+    .cc {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      align-items: flex-start;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 13px 14px;
+    }
+
+    .cc .ic {
+      width: 19px;
+      height: 19px;
+      color: var(--accent-text);
+      margin-top: 2px;
+    }
+
+    .cc-vals {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .cc-vals div {
+      font-size: 13.5px;
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    .contact-foot {
+      margin-top: 15px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      font-size: 12.5px;
+      color: var(--text-faint);
+      text-align: center;
+      line-height: 1.65;
+    }
+
+    @media (max-width: 640px) {
+      .section-rule {
+        padding: 0 12px;
+      }
+
+      .contact {
+        padding: 0 12px 26px;
+      }
+
+      .contact-box {
+        padding: 16px 14px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .banner-wrapper img {
+        height: 220px;
+      }
+
+      .arrow-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 15px;
+      }
+
+      .arrow-left {
+        left: 10px;
+      }
+
+      .arrow-right {
+        right: 10px;
+      }
+
+      .home-strip {
+        padding: 16px 12px 6px;
+      }
+
+      .home-grid {
+        padding: 0 12px 20px;
+      }
+    }
+
+    @media (min-width: 641px) and (max-width: 900px) {
+      .banner-wrapper img {
+        height: 380px;
+      }
+    }
+  </style>
+</head>
+
+<body class="dark" data-page="home" data-root="">
+  <div class="logo-hero">
+    <svg class="logo-cube" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img"
+      aria-label="The Ganbicle logo">
+      <path d="M12 3.2 4 7.4v9.2l8 4.2 8-4.2V7.4Z" />
+      <path d="M4 7.4l8 4.2 8-4.2M12 11.6v9.2" />
+    </svg>
+    <div class="logo-word">
+      <span class="logo-the">THE</span>
+      <span class="logo-name">GANBICLE</span>
+    </div>
+  </div>
+
+  <div class="section-rule"></div>
+
+  <div class="home-strip">
+    <div>
+      <h1>Best products</h1>
+      <p>The pick of the range, one for every size</p>
+    </div>
+  </div>
+  <div class="home-grid">
+    <div class="grid" id="bestGrid"></div>
+  </div>
+
+  <div class="home-strip">
+    <div>
+      <h1>Featured cubes</h1>
+      <p id="homeSubtitle">The complete GAN range</p>
+    </div>
+  </div>
+  <div class="home-grid">
+    <div class="grid" id="productGrid"></div>
+  </div>
+
+  <div class="banner-wrapper">
+    <img id="bannerImg" src="./Img/banners/356me_banner.webp" alt="banner" />
+    <img id="bannerImgNext" class="banner-slide" alt="" aria-hidden="true" />
+    <button class="arrow-btn arrow-left" onclick="changeBanner(-1)" aria-label="Previous banner">
+      &#10094;
+    </button>
+    <button class="arrow-btn arrow-right" onclick="changeBanner(1)" aria-label="Next banner">
+      &#10095;
+    </button>
+  </div>
+
+  <section class="picker">
+    <div class="picker-box">
+      <h2>Find your cube(Beta)</h2>
+      <p class="picker-sub">
+        Three questions, and only cubes that are actually in stock.
+      </p>
+      <div id="pickerQs"></div>
+      <div class="pick-out" id="pickOut"></div>
+    </div>
+  </section>
+
+  <section class="contact">
+    <div class="contact-box">
+      <h2>Contact & shipping</h2>
+      <div class="contact-sub">
+        Our contact information and shipping details.
+      </div>
+      <div class="contact-grid">
+        <div class="cc">
+          Phone:
+          <div class="cc-vals">
+            <div>+1 (555) 123-4567</div>
+          </div>
+        </div>
+        <div class="cc">
+          Email:
+          <div class="cc-vals">
+            <div>support@ganbicle.com</div>
+          </div>
+        </div>
+        <div class="cc">
+          Opening Hours:
+          <div class="cc-vals">
+            <div>Monday - Friday: 9AM - 6PM EST</div>
+            <div>Saturday: 7AM - 6PM EST</div>
+            <div>Sunday: Closed</div>
+          </div>
+        </div>
+        <div class="cc">
+          Shipping & Returns:
+          <div class="cc-vals">
+            <div id="contactShip">
+              Shipping fees are $4.95, otherwise free for orders over $75.
+              Returns accepted within 30 days.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const banners = [
+      "./Img/banners/sq1_banner.webp",
+      "./Img/banners/Sq1_banner_2.webp",
+      "./Img/banners/356me_banner.webp",
+      "./Img/banners/GAN16_ui_banner.webp",
+      "./Img/banners/Gan16_LE_banner.webp",
+    ];
+
+    let currentIndex = 2;
+    const bannerImg = document.getElementById("bannerImg");
+    const bannerImgNext = document.getElementById("bannerImgNext");
+
+    const SLIDE_MS = 400;
+    const COOLDOWN_MS = 550;
+    let sliding = false;
+
+    function setArrowsEnabled(on) {
+      for (const b of document.querySelectorAll(".arrow-btn")) {
+        b.disabled = !on;
+        b.style.opacity = on ? "" : ".45";
+        b.style.cursor = on ? "" : "default";
+      }
+    }
+
+    function changeBanner(direction) {
+      if (sliding) return;
+      sliding = true;
+      setArrowsEnabled(false);
+      setTimeout(() => {
+        sliding = false;
+        setArrowsEnabled(true);
+      }, COOLDOWN_MS);
+
+      let nextIndex = currentIndex + direction;
+      if (nextIndex < 0) nextIndex = banners.length - 1;
+      if (nextIndex >= banners.length) nextIndex = 0;
+
+      bannerImgNext.src = banners[nextIndex];
+      bannerImgNext.style.transition = "none";
+      bannerImgNext.style.transform = `translateX(${direction * 100}%)`;
+
+      void bannerImgNext.offsetWidth;
+
+      bannerImgNext.style.transition = "transform 0.4s ease-in-out";
+      bannerImg.style.transition = "transform 0.4s ease-in-out";
+      bannerImg.style.transform = `translateX(${-direction * 100}%)`;
+      bannerImgNext.style.transform = "translateX(0%)";
+
+      setTimeout(() => {
+        currentIndex = nextIndex;
+        bannerImg.src = banners[currentIndex];
+        bannerImg.style.transition = "none";
+        bannerImg.style.transform = "translateX(0%)";
+        bannerImgNext.style.transform = "";
+      }, 400);
+    }
+
+    setInterval(() => {
+      if (!sliding) changeBanner(1);
+    }, 6000);
+  </script>
+
+  <script src="assets/common.js"></script>
+  <script src="assets/data.js"></script>
+  <script src="assets/shop.js"></script>
+
+  <script>
+    (function () {
+      const qsHost = document.getElementById("pickerQs");
+      const outHost = document.getElementById("pickOut");
+      if (!qsHost || typeof PRODUCTS === "undefined") return;
+
+      const SIZES = ["2x2 Cube", "3x3 Cube", "4x4 Cube", "5x5 Cube"];
+      const QUESTIONS = [
+        {
+          key: "size",
+          label: "Which size?",
+          opts: SIZES.map((s) => ({ v: s, t: s.replace(" Cube", "") })),
+        },
+        {
+          key: "budget",
+          label: "Budget",
+          opts: [
+            { v: "40", t: "Under $40" },
+            { v: "70", t: "Under $70" },
+            { v: "0", t: "No limit" },
+          ],
+        },
+        {
+          key: "want",
+          label: "What matters most?",
+          opts: [
+            { v: "value", t: "Value for money" },
+            { v: "rated", t: "Highest rated" },
+            { v: "maglev", t: "MagLev core" },
+            { v: "smart", t: "Smart / Bluetooth" },
+          ],
+        },
+      ];
+      const answers = { size: "3x3 Cube", budget: "0", want: "value" };
+      const sizeName = () => answers.size.replace(" Cube", "");
+
+      const isGiftSet = (p) => /gift ?set/i.test(p.name);
+
+      const HOUSE_PICK = { "3x3 Cube": "gan12" };
+
+      function recommend() {
+        const notes = [];
+        let pool = PRODUCTS.filter(
+          (p) => p.category === answers.size && p.stock > 0 && !isGiftSet(p),
+        );
+        if (!pool.length)
+          return {
+            best: null,
+            notes: [
+              "Every " + sizeName() + " is out of stock at the moment.",
+            ],
+          };
+
+        const cap = Number(answers.budget);
+        if (cap) {
+          const within = pool.filter((p) => p.price <= cap);
+          if (within.length) pool = within;
+          else
+            notes.push(
+              "No " +
+              sizeName() +
+              " comes in under $" +
+              cap +
+              " - the cheapest is " +
+              money(
+                Math.min.apply(
+                  null,
+                  pool.map((p) => p.price),
+                ),
+              ) +
+              ", so here is the closest.",
+            );
+        }
+
+        if (!Number(answers.budget) && answers.want === "value") {
+          const pinned = HOUSE_PICK[answers.size];
+          const fam = pinned
+            ? pool.filter((p) => p.group === pinned || p.id === pinned)
+            : [];
+          if (fam.length) {
+            fam.sort(
+              (a, b) =>
+                b.rating - a.rating ||
+                b.reviews - a.reviews ||
+                a.price - b.price,
+            );
+            return {
+              best: fam[0],
+              notes: notes,
+              why:
+                "Our pick of the " +
+                sizeName() +
+                " range when budget is not the deciding factor.",
+            };
+          }
+        }
+
+        const want = answers.want;
+        let why;
+        if (want === "maglev" || want === "smart") {
+          const tagged = pool.filter((p) => p.tags.includes(want));
+          if (tagged.length) {
+            pool = tagged;
+            why =
+              want === "maglev"
+                ? "MagLev magnetic levitation core, and the best rated of those in " +
+                sizeName() +
+                "."
+                : "Bluetooth smart cube - tracks your moves in the GAN app.";
+          } else {
+            notes.push(
+              "No " +
+              sizeName() +
+              " in the range has a " +
+              (want === "maglev"
+                ? "MagLev core"
+                : "smart/Bluetooth feature") +
+              ", so this is ranked on rating instead.",
+            );
+            why = "Highest rated " + sizeName() + " that fits.";
+          }
+        } else if (want === "rated") {
+          why = "Highest rated " + sizeName() + " that fits your budget.";
+        } else {
+          why = "Best rating per dollar in " + sizeName() + ".";
+        }
+
+        const key = (p) => (want === "value" ? p.rating / p.price : p.rating);
+        pool = pool
+          .slice()
+          .sort(
+            (a, b) =>
+              key(b) - key(a) || b.reviews - a.reviews || a.price - b.price,
+          );
+        return { best: pool[0], notes: notes, why: why };
+      }
+
+      function render() {
+        const r = recommend();
+        outHost.innerHTML = "";
+        if (!r.best) {
+          outHost.appendChild(
+            el("div", { class: "pick-note", text: r.notes[0] }),
+          );
+          return;
+        }
+        const p = r.best;
+        outHost.appendChild(productImage(p, "thumb"));
+        const meta = el("div", { class: "pick-meta" });
+        meta.appendChild(
+          el("div", { class: "cbrand", text: p.brand.toUpperCase() }),
+        );
+        meta.appendChild(el("div", { class: "pick-name", text: p.name }));
+        meta.appendChild(ratingRow(p));
+        const price = el("div", {
+          class: "cprice" + (p.was ? " sale" : ""),
+          text: money(p.price),
+        });
+        meta.appendChild(price);
+        meta.appendChild(el("div", { class: "pick-why", text: r.why }));
+        for (const n of r.notes)
+          meta.appendChild(el("div", { class: "pick-note", text: n }));
+
+        const acts = el("div", { class: "pick-acts" });
+        const view = el("a", {
+          class: "btn",
+          href: productPageUrl(p),
+          text: "View details",
+        });
+        acts.appendChild(view);
+        acts.appendChild(
+          el("button", {
+            class: "btn primary",
+            text: "Add to cart",
+            onclick: () => addToCart(p.id, 1),
+          }),
+        );
+        meta.appendChild(acts);
+        outHost.appendChild(meta);
+      }
+
+      for (const q of QUESTIONS) {
+        const row = el("div", { class: "pq" });
+        row.appendChild(el("span", { class: "pq-lab", text: q.label }));
+        const seg = el("div", { class: "seg" });
+        for (const o of q.opts) {
+          const b = el("button", {
+            class: "grp-btn" + (answers[q.key] === o.v ? " checked" : ""),
+            text: o.t,
+          });
+          b.addEventListener("click", () => {
+            answers[q.key] = o.v;
+            for (const sib of seg.children) sib.classList.remove("checked");
+            b.classList.add("checked");
+            render();
+          });
+          seg.appendChild(b);
+        }
+        row.appendChild(seg);
+        qsHost.appendChild(row);
+      }
+      render();
+    })();
+
+    (function () {
+      const host = document.getElementById("bestGrid");
+      if (!host || typeof PRODUCTS === "undefined") return;
+      const BEST = ["gan251-m-pro", "gan16-max", "gan460-uv", "gan562-uv"];
+      const list = BEST.map((id) => PRODUCTS.find((p) => p.id === id))
+        .filter(Boolean)
+        .map((p) => Object.assign({}, p, { group: null, groupName: null }));
+      renderShop(list, host);
+    })();
+
+    (function () {
+      const host = document.getElementById("contactShip");
+      if (!host || typeof FREE_SHIP_OVER === "undefined") return;
+      host.textContent =
+        "Shipping fees are " +
+        money(SHIP_FLAT) +
+        ", otherwise free for orders over $" +
+        FREE_SHIP_OVER +
+        ". Returns accepted within 30 days.";
+    })();
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accessories — The Ganbicle</title>
+<meta name="description" content="GAN timers, training mats, lubricants and the auto-solving robot.">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="dark" data-page="accessories" data-root="../">
+<div id="shopPage" class="page">
+  <div class="shop-head">
+    <div><h1>Accessories</h1><p id="shopSubtitle">Loading catalogue</p>
+      </div>
+    <div class="searchbox">
+      <svg class="ic"><use href="#i-search"/></svg>
+      <input type="search" id="shopSearch" placeholder="Search accessories">
+    </div>
+  </div>
+  <div class="shop-body">
+    <aside class="filters">
+      <div class="fgroup"><h4>Accessories</h4><div id="fAccessory"></div></div>
+      <div class="fgroup"><h4>Max price</h4>
+        <input type="range" id="fPrice" min="10" max="160" value="160" step="5" style="width:100%;accent-color:var(--accent)">
+        <div style="font-size:12px;color:var(--text-faint);margin-top:4px" id="fPriceLab">Any</div>
+      </div>
+      <button class="btn ghost sm" id="fClear" style="width:100%;justify-content:center">Clear filters</button>
+    </aside>
+    <div class="shop-main">
+      <div class="shop-bar">
+        <span id="resultCount"></span>
+        <select id="shopSort">
+          <option value="featured">Featured</option>
+          <option value="price-asc">Price: low to high</option>
+          <option value="price-desc">Price: high to low</option>
+          <option value="rating">Highest rated</option>
+          <option value="name">Name A to Z</option>
+        </select>
+      </div>
+      <div class="grid" id="productGrid"></div>
+    </div>
+  </div>
+</div>
+
+
+<script src="../assets/common.js"></script>
+<script src="../assets/data.js"></script>
+<script src="../assets/shop.js"></script>
+</body>
+</html>

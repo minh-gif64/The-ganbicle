@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timer — The Ganbicle</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="dark" data-page="timer" data-root="../">
+<!-- ===================== TIMER PAGE ===================== -->
+<div id="timerPage" class="page">
+  <div class="topbar">
+    <div class="tb-item"><span class="tb-lab">Puzzle</span><div class="seg" id="typeGroup"></div></div>
+    <div class="tb-item" id="sizeWca"><span class="tb-lab">Size</span><div class="seg" id="wcaGroup"></div></div>
+    <div class="tb-item" id="sizeBig" hidden><span class="tb-lab">Size</span><div class="seg" id="bigGroup"></div></div>
+    <div class="tb-item"><span class="tb-lab">Mode</span><div class="seg" id="modeGroup"></div></div>
+    <div class="tb-item"><span class="tb-lab">Inspection</span>
+      <div class="spin"><input type="number" id="inspectSpin" min="0" max="15" value="15"><span>sec</span></div>
+    </div>
+    <div class="tb-item"><span class="tb-lab">Scramble type</span>
+      <div class="scr-wrap"><button id="scrBtn" class="scr-btn"></button>
+        <div class="scr-popup" id="scrPopup">
+          <button class="scr-cat" id="scrWca">WCA scramble</button>
+          <button class="scr-cat" id="scrCfop">CFOP scramble<span>&rsaquo;</span></button>
+          <button class="scr-cat" id="scrAlgs">CFOP algs<span>&rsaquo;</span></button>
+          <div class="scr-divider" id="scrDivider" style="display:none"></div>
+          <div class="scr-sub" id="subCfop"></div>
+          <div class="scr-sub" id="subAlgs"></div>
+        </div>
+      </div>
+    </div>
+    <div class="tb-icons">
+      <button id="btnGraph" class="icon-btn" title="Show solve graph" aria-label="Show solve graph"><svg class="ic"><use href="#i-chart"/></svg></button>
+      <button id="btnColor" class="icon-btn" title="Choose front face colour" aria-label="Choose front face colour"><svg class="ic"><use href="#i-palette"/></svg></button>
+      <button id="btnHelp" class="icon-btn" title="Help" aria-label="Help"><svg class="ic"><use href="#i-help"/></svg></button>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="cube-pane">
+      <canvas id="cubeCanvas"></canvas>
+      <div class="cube-foot">
+        <span>Speed</span>
+        <input type="range" id="speedSlider" min="1" max="25" value="5" title="Cube rotation speed">
+        <span id="speedVal">5&deg;/frame</span>
+      </div>
+    </div>
+
+    <div class="timer-pane">
+      <div>
+        <textarea id="scrambleText" readonly></textarea>
+        <div class="alg-btns">
+          <button id="btnChangeOll" class="btn ghost sm" hidden>Change OLL case</button>
+          <button id="btnChangePll" class="btn ghost sm" hidden>Change PLL case</button>
+          <button id="btnChangeF2l" class="btn ghost sm" hidden>Change F2L case</button>
+        </div>
+      </div>
+
+      <div class="timer-block">
+        <div class="time-label" id="timeLabel">00:00.00</div>
+        <div class="sub" id="inspectLabel"></div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><div class="sl">Best</div><div class="sv" id="statBest">&mdash;</div></div>
+        <div class="stat"><div class="sl">Mo3</div><div class="sv" id="statMo3">&mdash;</div></div>
+        <div class="stat"><div class="sl">Ao5</div><div class="sv" id="statAo5">&mdash;</div></div>
+        <div class="stat"><div class="sl">Solves</div><div class="sv" id="statCount">0</div></div>
+      </div>
+
+      <div class="actions">
+        <button id="btnGenerate" class="btn primary"><svg class="ic"><use href="#i-dice"/></svg>New scramble</button>
+        <button id="btnInspect" class="btn"><svg class="ic"><use href="#i-eye"/></svg>Inspect</button>
+        <button id="btnSolve" class="btn"><svg class="ic"><use href="#i-play"/></svg>Start</button>
+        <button id="btnStop" class="btn"><svg class="ic"><use href="#i-stop"/></svg>Stop</button>
+        <button id="btnNext" class="btn"><svg class="ic"><use href="#i-next"/></svg>Next solve</button>
+        <span class="spacer"></span>
+        <button id="btnCubeSolver" class="btn locked-btn"><svg class="ic"><use href="#i-lock"/></svg>Cube solver</button>
+        <button id="btnManagePbs" class="icon-btn" title="Manage personal bests" aria-label="Manage personal bests"><svg class="ic"><use href="#i-trash"/></svg></button>
+      </div>
+
+      <div class="status" id="statusLabel"></div>
+    </div>
+  </div>
+
+  <div id="graphWrap" hidden><canvas id="graphCanvas"></canvas></div>
+
+  <div class="pb-panel">
+    <div class="pb-head"><b>Personal bests</b><span>Full list and editing in Manage PBs</span></div>
+    <div class="pb-row">
+      <div class="pb-col"><div class="hdr">Singles and averages</div><div class="list-box" id="pbNormal"></div></div>
+      <div class="pb-col"><div class="hdr">OLL</div><div class="list-box" id="pbOll"></div></div>
+      <div class="pb-col"><div class="hdr">PLL</div><div class="list-box" id="pbPll"></div></div>
+    </div>
+  </div>
+</div>
+
+<div id="solverPage" class="page">
+  <div class="speed-row">
+    <span>Cube Speed:</span>
+    <input type="range" id="solverSpeed" min="1" max="25" value="5">
+    <span id="solverSpeedVal" style="width:70px">5°/frame</span>
+  </div>
+  <div class="solver-top">
+    <button id="btnBack" class="btn"><svg class="ic"><use href="#i-back"/></svg>Back to timer</button>
+    <h2>Cube solver</h2>
+    <label class="lab">Cube size:</label>
+    <select id="solverSize">
+      <option>2x2</option><option selected>3x3</option><option>4x4</option><option>5x5</option>
+      <option>6x6</option><option>7x7</option><option>8x8</option><option>9x9</option><option>10x10</option>
+    </select>
+  </div>
+  <canvas id="solverCanvas"></canvas>
+  <label class="lab">Scramble: (type or paste your own, then click Apply)</label>
+  <textarea id="solverScramble" placeholder="Generate a scramble below, or paste/type one here (e.g. R U R' U') then click Apply."></textarea>
+  <div class="status" id="solverStatus"></div>
+  <div class="solver-btns">
+    <button id="btnSolverGen" class="btn primary">New scramble</button>
+    <button id="btnSolverApply" class="btn" title="Apply the scramble typed or pasted in the box above">Apply scramble</button>
+    <button id="btnSolverSolve" class="btn" disabled>Solve cube</button>
+  </div>
+</div>
+
+
+<script src="../assets/common.js"></script>
+<script src="../assets/data.js"></script>
+<script src="../assets/shop.js"></script>
+<script src="../assets/timer.js"></script>
+</body>
+</html>
